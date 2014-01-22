@@ -10,6 +10,7 @@ class InnoworkBug extends InnoworkItem
     public $mNoTrash = false;
     public $mConvertible = true;
     public $mNoAcl = true;
+    public $mTags = array('task');
     const ITEM_TYPE = 'bug';
 
     //var $mNoAcl = true;
