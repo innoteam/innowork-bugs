@@ -1149,6 +1149,9 @@ $this->toolbars['mail'] = array(
     
         if (isset($GLOBALS['innowork-bugs']['newbugid'])) {
             $eventData['id'] = $GLOBALS['innowork-bugs']['newbugid'];
+            $newBug = true;
+        } else {
+            $newBug = false;
         }
     
         $innowork_bug = new InnoworkBug(
@@ -1221,19 +1224,29 @@ $this->toolbars['mail'] = array(
         }
     
         $statuses = InnoworkBugField::getFields(InnoworkBugField::TYPE_STATUS);
-        $statuses['0'] = $this->localeCatalog->getStr('nostatus.label');
+        if (($newTicket == false and $bug_data['statusid'] == 0) or !count($statuses)) {
+            $statuses['0'] = $this->localeCatalog->getStr('nostatus.label');
+        }
     
         $priorities = InnoworkBugField::getFields(InnoworkBugField::TYPE_PRIORITY);
-        $priorities['0'] = $this->localeCatalog->getStr('nopriority.label');
+        if (($newTicket == false and $bug_data['priorityid'] == 0) or !count($priorities)) {
+            $priorities['0'] = $this->localeCatalog->getStr('nopriority.label');
+        }
     
         $sources = InnoworkBugField::getFields(InnoworkBugField::TYPE_SOURCE);
-        $sources['0'] = $this->localeCatalog->getStr('nosource.label');
+        if (($newTicket == false and $bug_data['sourceid'] == 0) or !count($sources)) {
+            $sources['0'] = $this->localeCatalog->getStr('nosource.label');
+        }
     
         $resolutions = InnoworkBugField::getFields(InnoworkBugField::TYPE_RESOLUTION);
-        $resolutions['0'] = $this->localeCatalog->getStr('noresolution.label');
+        if (($newTicket == false and $bug_data['resolutionid'] == 0) or !count($resolutions)) {
+            $resolutions['0'] = $this->localeCatalog->getStr('noresolution.label');
+        }
     
         $types = InnoworkBugField::getFields(InnoworkBugField::TYPE_SEVERITY);
-        $types['0'] = $this->localeCatalog->getStr('notype.label');
+        if (($newTicket == false and $bug_data['severityid'] == 0) or !count($types)) {
+            $types['0'] = $this->localeCatalog->getStr('notype.label');
+        }
     
         if ($bug_data['done'] == \Innomatic\Core\InnomaticContainer::instance('\Innomatic\Core\InnomaticContainer')->getCurrentDomain()->getDataAccess()->fmttrue) {
             $done_icon = 'misc3';
