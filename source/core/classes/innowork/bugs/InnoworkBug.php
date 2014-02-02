@@ -26,7 +26,6 @@ class InnoworkBug extends InnoworkItem
         $this->mKeys['steps'] = 'text';
         $this->mKeys['solution'] = 'text';
         $this->mKeys['projectid'] = 'table:innowork_projects:name:integer';
-        $this->mKeys['customerid'] = 'table:innowork_directory_companies:companyname:integer';
         $this->mKeys['statusid'] = 'table:innowork_bugs_fields_values:fieldvalue:integer';
         $this->mKeys['priorityid'] = 'table:innowork_bugs_fields_values:fieldvalue:integer';
         $this->mKeys['sourceid'] = 'table:innowork_bugs_fields_values:fieldvalue:integer';
@@ -39,7 +38,6 @@ class InnoworkBug extends InnoworkItem
 
         $this->mSearchResultKeys[] = 'title';
         $this->mSearchResultKeys[] = 'projectid';
-        $this->mSearchResultKeys[] = 'customerid';
         $this->mSearchResultKeys[] = 'severityid';
         $this->mSearchResultKeys[] = 'statusid';
         $this->mSearchResultKeys[] = 'priorityid';
@@ -53,7 +51,6 @@ class InnoworkBug extends InnoworkItem
         $this->mViewableSearchResultKeys[] = 'id';
         $this->mViewableSearchResultKeys[] = 'title';
         $this->mViewableSearchResultKeys[] = 'projectid';
-        $this->mViewableSearchResultKeys[] = 'customerid';
         $this->mViewableSearchResultKeys[] = 'severityid';
         $this->mViewableSearchResultKeys[] = 'statusid';
         $this->mViewableSearchResultKeys[] = 'priorityid';
@@ -67,7 +64,6 @@ class InnoworkBug extends InnoworkItem
         $this->mShowDispatcher = 'view';
         $this->mShowEvent = 'showbug';
 
-        $this->mGenericFields['companyid'] = 'customerid';
         $this->mGenericFields['projectid'] = 'projectid';
         $this->mGenericFields['title'] = 'title';
         $this->mGenericFields['content'] = 'description';
@@ -83,11 +79,6 @@ class InnoworkBug extends InnoworkItem
 
             if ( $params['done'] == 'true' ) $params['done'] = $this->mrDomainDA->fmttrue;
             else $params['done'] = $this->mrDomainDA->fmtfalse;
-
-            if (
-                !isset($params['customerid'] )
-                or !strlen( $params['customerid'] )
-                ) $params['customerid'] = '0';
 
             if (
                 !isset($params['projectid'] )
@@ -165,7 +156,6 @@ class InnoworkBug extends InnoworkItem
                     break;
 
                 case 'projectid':
-                case 'customerid':
                 case 'statusid':
                 case 'priorityid':
                 case 'sourceid':
@@ -240,7 +230,6 @@ class InnoworkBug extends InnoworkItem
                             break;
 
                         case 'projectid':
-                        case 'customerid':
                         case 'statusid':
                         case 'priorityid':
                         case 'sourceid':
@@ -419,37 +408,11 @@ class InnoworkBug extends InnoworkItem
 '<vertgroup>
   <children>';
 
-        if ( count( $bugs_search ) ) {
-            $locale = new LocaleCatalog(
-                'innowork-bugs::innoworkbugs_domain_main',
-                \Innomatic\Core\InnomaticContainer::instance('\Innomatic\Core\InnomaticContainer')->getCurrentUser()->getLanguage()
-                );
-
-            $innowork_companies = new InnoworkCompany(
-                \Innomatic\Core\InnomaticContainer::instance('\Innomatic\Core\InnomaticContainer')->getDataAccess(),
-                \Innomatic\Core\InnomaticContainer::instance('\Innomatic\Core\InnomaticContainer')->getCurrentDomain()->getDataAccess()
-                );
-            $search_results = $innowork_companies->Search(
-                '',
-                \Innomatic\Core\InnomaticContainer::instance('\Innomatic\Core\InnomaticContainer')->getCurrentUser()->getUserId()
-                );
-            $customers[0] = $locale->getStr( 'nocustomer.label' );
-            while ( list( $id, $fields ) = each( $search_results ) ) {
-                $customers[$id] = $fields['companyname'];
-            }
-            unset( $locale );
-            unset( $search_results );
-        }
-
         foreach ( $bugs_search as $bug ) {
-            $customer = strlen( $customers[$bug['customerid']] ) > 25 ?
-                substr( $customers[$bug['customerid']], 0, 22 ).'...' :
-                $customers[$bug['customerid']];
-
             $result .=
 '<link>
   <args>
-    <label type="encoded">'.urlencode( '- '.$bug['id'].' ('.$customer.')' ).'</label>
+    <label type="encoded">'.urlencode( '- '.$bug['id'] ).'</label>
     <link type="encoded">'.urlencode(
         WuiEventsCall::buildEventsCallString( 'innoworkbugs', array(
                 array(

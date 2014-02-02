@@ -3,6 +3,7 @@
 CHANGES:
 - Removed the empty value from bug fields, when there are list of values.
   (Alex Pagnoni)
+- Removed customer field in bug item type. (Alex Pagnoni)
 
 
 
