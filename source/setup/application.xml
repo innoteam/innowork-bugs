@@ -4,8 +4,8 @@
 	<definition>
 		<idname>innowork-bugs</idname>
 		<release>
-			<version>1.0.0</version>
-			<date>2014/01/15</date>
+			<version>1.2.0</version>
+			<date>2014/02/02</date>
 			<changesfile>CHANGES</changesfile>
 		</release>
 		<description>Innowork Bugs</description>
@@ -13,7 +13,7 @@
 		<iconfile></iconfile>
 		<dependencies>
 			<dependency>innomatic[6.2]</dependency>
-			<dependency>innowork-core[3.1]</dependency>
+			<dependency>innowork-core[3.3.0]</dependency>
 			<dependency>innowork-groupware[2.0]</dependency>
 			<dependency>innowork-projects</dependency>
 		</dependencies>

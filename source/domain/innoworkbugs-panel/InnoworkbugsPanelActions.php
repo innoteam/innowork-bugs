@@ -129,7 +129,6 @@ class InnoworkbugsPanelActions extends \Innomatic\Desktop\Panel\PanelActions
     }
     
     public function executeErasefilter($eventData) {
-    	$filter_sk = new WuiSessionKey('customer_filter', array('value' => ''));
     	$filter_sk = new WuiSessionKey('project_filter', array('value' => ''));
     	$filter_sk = new WuiSessionKey('priority_filter', array('value' => ''));
     	$filter_sk = new WuiSessionKey('status_filter', array('value' => ''));

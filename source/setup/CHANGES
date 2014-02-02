@@ -1,3 +1,22 @@
+1.2.0 - 2014/02/02
+----------------
+CHANGES:
+- Removed the empty value from bug fields, when there are list of values.
+  (Alex Pagnoni)
+- Removed customer field in bug item type. (Alex Pagnoni)
+
+
+
+1.1
+----------------
+NEW FEATURES:
+- Added "task" tag. (Alex Pagnoni)
+
+CHANGES:
+- Changed innowork-core depency to version 3.3. (Alex Pagnoni)
+
+
+
 1.0 - 2014/01/15
 ----------------
 - First release.
