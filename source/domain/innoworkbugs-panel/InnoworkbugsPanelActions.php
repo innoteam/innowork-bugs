@@ -36,8 +36,13 @@ class InnoworkbugsPanelActions extends \Innomatic\Desktop\Panel\PanelActions
     		\Innomatic\Core\InnomaticContainer::instance('\Innomatic\Core\InnomaticContainer')->getDataAccess(),
     		\Innomatic\Core\InnomaticContainer::instance('\Innomatic\Core\InnomaticContainer')->getCurrentDomain()->getDataAccess()
     	);
-    
-    	if ($bug->Create($eventData)) {
+
+    	if (isset($eventData['projectid_id'])) {
+    	    $eventData['projectid'] = $eventData['projectid_id'];
+    	    unset($eventData['projectid_id']);
+    	}
+
+    	if ($bug->create($eventData)) {
     		$GLOBALS['innowork-bugs']['newbugid'] = $bug->mItemId;
     		$this->status = $this->localeCatalog->getStr('bug_created.status');
     	} else {
