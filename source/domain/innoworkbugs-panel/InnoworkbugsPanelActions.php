@@ -42,6 +42,9 @@ class InnoworkbugsPanelActions extends \Innomatic\Desktop\Panel\PanelActions
     	    unset($eventData['projectid_id']);
     	}
 
+        $eventData['openedby'] = \Innomatic\Core\InnomaticContainer::instance('\Innomatic\Core\InnomaticContainer')->getCurrentUser()->getUserId();
+        $eventData['assignedto'] = \Innomatic\Core\InnomaticContainer::instance('\Innomatic\Core\InnomaticContainer')->getCurrentUser()->getUserId();
+
     	if ($bug->create($eventData)) {
     		$GLOBALS['innowork-bugs']['newbugid'] = $bug->mItemId;
     		$this->status = $this->localeCatalog->getStr('bug_created.status');
@@ -52,17 +55,17 @@ class InnoworkbugsPanelActions extends \Innomatic\Desktop\Panel\PanelActions
     	$this->setChanged();
     	$this->notifyObservers('status');
     }
-    
+
     public function executeEditbug($eventData)
     {
     	require_once('innowork/bugs/InnoworkBug.php');
-    	
+
     	$bug = new InnoworkBug(
     		\Innomatic\Core\InnomaticContainer::instance('\Innomatic\Core\InnomaticContainer')->getDataAccess(),
     		\Innomatic\Core\InnomaticContainer::instance('\Innomatic\Core\InnomaticContainer')->getCurrentDomain()->getDataAccess(),
     		$eventData['id']
     	);
-    
+
     	if ($bug->Edit($eventData)) {
     		$this->status = $this->localeCatalog->getStr('bug_updated.status');
     	} else {
@@ -72,37 +75,37 @@ class InnoworkbugsPanelActions extends \Innomatic\Desktop\Panel\PanelActions
     	$this->setChanged();
     	$this->notifyObservers('status');
     }
-    
+
     public function executeTrashbug($eventData)
     {
     	require_once('innowork/bugs/InnoworkBug.php');
-    	
+
     	$bug = new InnoworkBug(
     		\Innomatic\Core\InnomaticContainer::instance('\Innomatic\Core\InnomaticContainer')->getDataAccess(),
     		\Innomatic\Core\InnomaticContainer::instance('\Innomatic\Core\InnomaticContainer')->getCurrentDomain()->getDataAccess(),
     		$eventData['id']
     	);
-    
+
     	if ($bug->trash(\Innomatic\Core\InnomaticContainer::instance('\Innomatic\Core\InnomaticContainer')->getCurrentUser()->getUserId())) {
     		$this->status = $this->localeCatalog->getStr('bug_trashed.status');
     	} else {
     		$this->status = $this->localeCatalog->getStr('bug_not_trashed.status');
     	}
-    	
+
     	$this->setChanged();
     	$this->notifyObservers('status');
     }
-    
+
     public function executeNewmessage($eventData)
     {
     	require_once('innowork/bugs/InnoworkBug.php');
-    	
+
     	$bug = new InnoworkBug(
     		\Innomatic\Core\InnomaticContainer::instance('\Innomatic\Core\InnomaticContainer')->getDataAccess(),
     		\Innomatic\Core\InnomaticContainer::instance('\Innomatic\Core\InnomaticContainer')->getCurrentDomain()->getDataAccess(),
     		$eventData['bugid']
     	);
-    
+
     	if ($bug->addMessage(
     		\Innomatic\Core\InnomaticContainer::instance('\Innomatic\Core\InnomaticContainer')->getCurrentUser()->getUserName(),
     		$eventData['content'])
@@ -115,24 +118,24 @@ class InnoworkbugsPanelActions extends \Innomatic\Desktop\Panel\PanelActions
     	$this->setChanged();
     	$this->notifyObservers('status');
     }
-    
+
     public function executeRemovemessage($eventData)
     {
     	require_once('innowork/bugs/InnoworkBug.php');
-    	
+
     	$bug = new InnoworkBug(
     		\Innomatic\Core\InnomaticContainer::instance('\Innomatic\Core\InnomaticContainer')->getDataAccess(),
     		\Innomatic\Core\InnomaticContainer::instance('\Innomatic\Core\InnomaticContainer')->getCurrentDomain()->getDataAccess(),
     		$eventData['bugid']
     	);
-    
+
     	if ($bug->removeMessage($eventData['messageid'])) $this->status = $this->localeCatalog->getStr('message_removed.status');
     	else $this->status = $this->localeCatalog->getStr('message_not_removed.status');
 
     	$this->setChanged();
     	$this->notifyObservers('status');
     }
-    
+
     public function executeErasefilter($eventData) {
     	$filter_sk = new WuiSessionKey('project_filter', array('value' => ''));
     	$filter_sk = new WuiSessionKey('priority_filter', array('value' => ''));
