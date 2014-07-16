@@ -49,7 +49,7 @@
             category="preferences"
             themeicon="plan" themeicontype="apps"
             catalog="innowork-bugs::innoworkbugs_misc" />
-            
+
 		<domaintable name="innowork_bugs"
 			file="innowork_bugs.xml" />
 		<domaintable name="innowork_bugs_messages"
@@ -74,7 +74,7 @@
             file="InnoworkMyBugsDashboardWidget.php"
             catalog="innowork-bugs::innoworkbugs_dashboard"
             title="mybugs"
-            class="\\Shared\\Dashboard\\InnoworkMyBugsDashboardWidget" />
-            
+            class="\Shared\Dashboard\InnoworkMyBugsDashboardWidget" />
+
 	</components>
 </application>
