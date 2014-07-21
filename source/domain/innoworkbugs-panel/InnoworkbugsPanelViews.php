@@ -1508,6 +1508,7 @@ $this->toolbars['mail'] = array(
                 <label>'.$this->localeCatalog->getStr('trash_bug.button').'</label>
                 <frame>false</frame>
                 <horiz>true</horiz>
+                <dangeraction>true</dangeraction>
                 <action>'.WuiXml::cdata(
                             \Innomatic\Wui\Dispatch\WuiEventsCall::buildEventsCallString(
                                     '',
