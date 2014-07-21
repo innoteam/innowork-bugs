@@ -97,18 +97,6 @@ class InnoworkMyBugsDashboardWidget extends \Innomatic\Desktop\Dashboard\Dashboa
 
         $xml .= '<horizgroup><args><width>0%</width></args><children>';
 
-        if (count($search_result) > 0) {
-        	$xml .= '  <button>
-    <args>
-      <horiz>true</horiz>
-      <frame>false</frame>
-      <themeimage>zoom</themeimage>
-      <label>'.$locale_catalog->getStr('show_all_my_bugs.button').'</label>
-      <action>'.WuiXml::cdata(\Innomatic\Wui\Dispatch\WuiEventsCall::buildEventsCallString('innoworkbugs', array(array('view', 'default', array('filter' => 'true', 'filter_assignedto' => \Innomatic\Core\InnomaticContainer::instance('\Innomatic\Core\InnomaticContainer')->getCurrentUser()->getUserId()))))).'</action>
-    </args>
-  </button>';
-        }
-
         $xml .= '
   <button>
     <args>
@@ -120,6 +108,18 @@ class InnoworkMyBugsDashboardWidget extends \Innomatic\Desktop\Dashboard\Dashboa
       <action>'.WuiXml::cdata(\Innomatic\Wui\Dispatch\WuiEventsCall::buildEventsCallString('innoworkbugs', array(array('view', 'newbug', array())))).'</action>
     </args>
   </button>';
+
+        if (count($search_result) > 0) {
+        	$xml .= '  <button>
+    <args>
+      <horiz>true</horiz>
+      <frame>false</frame>
+      <themeimage>zoom</themeimage>
+      <label>'.$locale_catalog->getStr('show_all_my_bugs.button').'</label>
+      <action>'.WuiXml::cdata(\Innomatic\Wui\Dispatch\WuiEventsCall::buildEventsCallString('innoworkbugs', array(array('view', 'default', array('filter' => 'true', 'filter_assignedto' => \Innomatic\Core\InnomaticContainer::instance('\Innomatic\Core\InnomaticContainer')->getCurrentUser()->getUserId()))))).'</action>
+    </args>
+  </button>';
+        }
 
   $xml .= '</children></horizgroup>
 
