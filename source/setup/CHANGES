@@ -9,6 +9,9 @@ CHANGES:
 NEW FEATURES:
 - Added project autocomplete when creating a new bug. (Alex Pagnoni)
 
+FIXES:
+- Fixed wrong no ACL policy. (Alex Pagnoni)
+
 
 
 1.2.0 - 2014/02/02

@@ -9,7 +9,6 @@ class InnoworkBug extends InnoworkItem
     public $mNewEvent = 'newbug';
     public $mNoTrash = false;
     public $mConvertible = true;
-    public $mNoAcl = true;
     public $mTypeTags = array('task');
     public $mParentType = 'project';
     public $mParentIdField = 'projectid';
