@@ -11,6 +11,8 @@ class InnoworkBug extends InnoworkItem
     public $mConvertible = true;
     public $mNoAcl = true;
     public $mTypeTags = array('task');
+    public $mParentType = 'project';
+    public $mParentIdField = 'projectid';
     const ITEM_TYPE = 'bug';
 
     //var $mNoAcl = true;
@@ -47,7 +49,7 @@ class InnoworkBug extends InnoworkItem
         $this->mSearchResultKeys[] = 'done';
         $this->mSearchResultKeys[] = 'openedby';
         $this->mSearchResultKeys[] = 'assignedto';
-        
+
         $this->mViewableSearchResultKeys[] = 'id';
         $this->mViewableSearchResultKeys[] = 'title';
         $this->mViewableSearchResultKeys[] = 'projectid';
@@ -108,15 +110,15 @@ class InnoworkBug extends InnoworkItem
             if (!isset($params['severityid']) or !strlen($params['severityid'])) {
             	$params['severityid'] = '0';
             }
-            
+
             if (!isset($params['openedby']) or !strlen($params['openedby'])) {
             	$params['openedby'] = '0';
             }
-            
+
             if (!isset($params['assignedto']) or !strlen($params['assignedto'])) {
             	$params['assignedto'] = '0';
             }
-                        
+
         if (count($params)) {
             $item_id = $this->mrDomainDA->getNextSequenceValue( $this->mTable.'_id_seq' );
 
