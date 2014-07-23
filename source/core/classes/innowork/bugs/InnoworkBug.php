@@ -34,8 +34,8 @@ class InnoworkBug extends InnoworkItem
         $this->mKeys['severityid'] = 'table:innowork_bugs_fields_values:fieldvalue:integer';
         $this->mKeys['creationdate'] = 'timestamp';
         $this->mKeys['done'] = 'boolean';
-        $this->mKeys['openedby'] = 'integer';
-        $this->mKeys['assignedto'] = 'integer';
+        $this->mKeys['openedby'] = 'table:domain_users:username:integer';
+        $this->mKeys['assignedto'] = 'table:domain_users:username:integer';
 
         $this->mSearchResultKeys[] = 'title';
         $this->mSearchResultKeys[] = 'projectid';
