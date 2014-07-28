@@ -36,6 +36,7 @@ class InnoworkBug extends InnoworkItem
         $this->mKeys['done'] = 'boolean';
         $this->mKeys['openedby'] = 'userid';
         $this->mKeys['assignedto'] = 'userid';
+        $this->mKeys['iterationid'] = 'integer';
 
         $this->mSearchResultKeys[] = 'title';
         $this->mSearchResultKeys[] = 'projectid';
