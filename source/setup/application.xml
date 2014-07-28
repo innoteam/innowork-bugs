@@ -4,8 +4,8 @@
 	<definition>
 		<idname>innowork-bugs</idname>
 		<release>
-			<version>1.2.0</version>
-			<date>2014/02/02</date>
+			<version>1.3.0</version>
+            <date>2014/07/28</date>
 			<changesfile>CHANGES</changesfile>
 		</release>
 		<description>Innowork Bugs</description>
@@ -13,7 +13,7 @@
 		<iconfile></iconfile>
 		<dependencies>
 			<dependency>innomatic[6.2]</dependency>
-			<dependency>innowork-core[3.3.0]</dependency>
+			<dependency>innowork-core[3.5.0]</dependency>
 			<dependency>innowork-groupware[2.0]</dependency>
 			<dependency>innowork-projects</dependency>
 		</dependencies>
@@ -24,18 +24,18 @@
 			<author>
 				<name>Innoteam Srl</name>
 				<email>info@innoteam.it</email>
-				<web>http://www.innoteam.it/</web>
+				<web>http://www.innomatic.io/</web>
 			</author>
 			<copyright>Copyright (c) 2014 Innoteam Srl</copyright>
 			<license>Commercial</license>
 			<licensefile>LICENSE</licensefile>
 		</legal>
 		<support>
-			<supportemail>helpdesk@innoteam.it</supportemail>
-			<bugsemail>helpdesk@innoteam.it</bugsemail>
+			<supportemail>helpdesk@innomatic.io</supportemail>
+			<bugsemail>helpdesk@innomatic.imatic.io</bugsemail>
 			<maintainer>
 				<name>Innoteam Srl</name>
-				<email>helpdesk@innoteam.it</email>
+				<email>helpdesk@innomatic.io</email>
 			</maintainer>
 		</support>
 	</definition>
@@ -49,7 +49,7 @@
             category="preferences"
             themeicon="plan" themeicontype="apps"
             catalog="innowork-bugs::innoworkbugs_misc" />
-            
+
 		<domaintable name="innowork_bugs"
 			file="innowork_bugs.xml" />
 		<domaintable name="innowork_bugs_messages"
@@ -74,7 +74,7 @@
             file="InnoworkMyBugsDashboardWidget.php"
             catalog="innowork-bugs::innoworkbugs_dashboard"
             title="mybugs"
-            class="\\Shared\\Dashboard\\InnoworkMyBugsDashboardWidget" />
-            
+            class="\Shared\Dashboard\InnoworkMyBugsDashboardWidget" />
+
 	</components>
 </application>
