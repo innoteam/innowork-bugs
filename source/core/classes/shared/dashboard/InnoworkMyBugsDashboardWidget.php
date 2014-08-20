@@ -10,28 +10,33 @@ class InnoworkMyBugsDashboardWidget extends \Innomatic\Desktop\Dashboard\Dashboa
 {
     public function getWidgetXml()
     {
+        $container = InnomaticContainer::instance('\Innomatic\Core\InnomaticContainer');
+
         $locale_catalog = new \Innomatic\Locale\LocaleCatalog(
             'innowork-bugs::innoworkbugs_dashboard',
-            InnomaticContainer::instance('\Innomatic\Core\InnomaticContainer')->getCurrentUser()->getLanguage()
+            $container->getCurrentUser()->getLanguage()
         );
 
-    	$locale_country = new \Innomatic\Locale\LocaleCountry(
-			InnomaticContainer::instance('\Innomatic\Core\InnomaticContainer')->getCurrentUser()->getCountry()
+        $locale_country = new \Innomatic\Locale\LocaleCountry(
+            $container->getCurrentUser()->getCountry()
         );
 
-    	require_once('innowork/bugs/InnoworkBug.php');
+        require_once('innowork/bugs/InnoworkBug.php');
 
-		$bugs = new InnoworkBug(
-			\Innomatic\Core\InnomaticContainer::instance('\Innomatic\Core\InnomaticContainer')->getDataAccess(),
-			\Innomatic\Core\InnomaticContainer::instance('\Innomatic\Core\InnomaticContainer')->getCurrentDomain()->getDataAccess()
-		);
+        $bugs = new InnoworkBug(
+            $container->getDataAccess(),
+            $container->getCurrentDomain()->getDataAccess()
+        );
 
-		$bugs->mSearchOrderBy = 'id DESC';
+        $bugs->mSearchOrderBy = 'id DESC';
 
-		$search_result = $bugs->search(
-			array('done' => \Innomatic\Core\InnomaticContainer::instance('\Innomatic\Core\InnomaticContainer')->getCurrentDomain()->getDataAccess()->fmtfalse, 'assignedto' => \Innomatic\Core\InnomaticContainer::instance('\Innomatic\Core\InnomaticContainer')->getCurrentUser()->getUserId()),
-			\Innomatic\Core\InnomaticContainer::instance('\Innomatic\Core\InnomaticContainer')->getCurrentUser()->getUserId()
-		);
+        $search_result = $bugs->search(
+            array(
+                'done' => $container->getCurrentDomain()->getDataAccess()->fmtfalse,
+                'assignedto' => $container->getCurrentUser()->getUserId()
+            ),
+            $container->getCurrentUser()->getUserId()
+        );
 
         $xml =
         '<vertgroup>
