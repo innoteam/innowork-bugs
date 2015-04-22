@@ -2,6 +2,7 @@ x.x.x
 ------------------
 FIXES:
 - Fixed the loss of parameters in the search of the bugs. (Amanda Accalai)
+- Fixed the box in dashboard of the bugs open. (Amanda Accalai)
 
 1.3.0 - 2014/07/28
 ------------------
